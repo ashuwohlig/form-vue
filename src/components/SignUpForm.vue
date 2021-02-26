@@ -5,6 +5,7 @@
 
 <label>Password</label>
 <input type="password" required v-model="password">
+<div v-if="passwordError" class="error">{{passwordError}}</div>
 
 <label>Role</label>
 <select v-model="role">
@@ -16,7 +17,6 @@
 <input type="checkbox" v-model="terms" required>
 <label>Accept terms and codition</label>
 </div>
-
 
 <div><input type="checkbox" v-model="names" value="Shaun">
     <label>Shaun</label>
@@ -39,7 +39,6 @@
     <button>create an account</button>
 </div>
 </form>
-<p>{{names}}</p>
 
 </template>
 
@@ -53,7 +52,8 @@ data(){
         terms:false,
         names:[],
         tempSkill:'',
-        skills:[]
+        skills:[],
+        passwordError:''
     }
 },
 methods: {
@@ -77,6 +77,12 @@ methods: {
         })
     },
     handleSubmit(){
+        //
+        this.passwordError=this.password.length>5? '':'length is small';
+        if(!this.passwordError)
+        {
+             
+        }
      
     }
 }
@@ -91,8 +97,7 @@ form{
     text-align:left;
     padding:40px;
     border-radius:10px;
-}
-    
+}    
     label{
         color:#aaa;
         display: inline-block;
@@ -109,9 +114,7 @@ input select{
     border:none;
     border-bottom:1px solid #ddd;
     color:#bbb;
-
 }
-
 input[type="checkbox"]
 {
     display:inline-block;
@@ -120,5 +123,10 @@ input[type="checkbox"]
     position:relative;
     top:2px;
 }
-
+.error{
+    color:red;
+    margin-top:10px;
+    font-size:0.8em;
+    font-weight: bold;
+}
 </style>
